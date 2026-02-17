@@ -3,15 +3,13 @@ import io.github.danzn.produtosapi.model.Produto;
 import io.github.danzn.produtosapi.repository.ProdutoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("produtos")
+@RequestMapping("/produtos")
 public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
@@ -26,6 +24,13 @@ public class ProdutoController {
         return produto; //Retonar o objeto produto , ele faz aparecer em json no Postman
     }
 
-    
+    @GetMapping("/{id}") //parametros de id
+    public Produto obterPorId(@PathVariable("id") String id) { //findById
+//        Optional<Produto> produto = produtoRepository.findById(id);
+//       return produto.isPresent() ? produto.get() : null; //O produto esta presente ?
+        return produtoRepository.findById(id).orElse(null); //Se tiver presente traz o produto por ID
+    }
+
+
 
 }
