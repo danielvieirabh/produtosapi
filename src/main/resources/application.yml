@@ -1,0 +1,15 @@
+#    Tudo tem que ficar dentro de spring
+spring:
+  application:
+    name: Produtos API
+  datasource:
+    url: jdbc:h2:mem:produtos
+    username: sa
+    password: dan
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+#      path e a url do banco
