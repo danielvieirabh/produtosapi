@@ -1,10 +1,21 @@
 package io.github.danzn.produtosapi.model;
 
+
+import jakarta.persistence.*;
+
+@Entity
+//@Table(name = "tb_produto") //caso o nome no banco seja tb_produto
 public class Produto {
 
+    @Column(name = "id") //nao e necessario colocar
+    @Id
     private String id;
+    
+    @Column //Nao e obrigatorio , serve para mapear as colunas do bancco
     private String nome;
+    @Column
     private String descricao;
+    @Column
     private Double preco;
 
 
