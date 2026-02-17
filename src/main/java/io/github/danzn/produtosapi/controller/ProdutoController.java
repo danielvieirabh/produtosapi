@@ -50,5 +50,9 @@ public class ProdutoController {
         produtoRepository.save(produto); //Usa o de salvar
     }
 
+    @GetMapping("/buscar")
+    public List<Produto> buscar(@RequestParam("nome") String nome) { //parametro que irei colocar na requisicao : http://localhost:8080/produtos/buscar?nome=caderno
+        return produtoRepository.findByNome(nome);
+    }
 
 }
