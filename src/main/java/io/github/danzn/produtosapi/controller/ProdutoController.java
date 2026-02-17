@@ -3,8 +3,10 @@ import io.github.danzn.produtosapi.model.Produto;
 import io.github.danzn.produtosapi.repository.ProdutoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,6 +15,12 @@ import java.util.UUID;
 public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @GetMapping
+    public ResponseEntity<List<Produto>> findAll() {
+        List<Produto> list = produtoRepository.findAll();//Busca todos os produtos
+        return ResponseEntity.ok().body(list);
+    }
 
     @PostMapping //Enviar dados
     public Produto salvar(@RequestBody Produto produto) { //@RequestBody , E para vir no boody da minha requisicao;
@@ -31,6 +39,10 @@ public class ProdutoController {
         return produtoRepository.findById(id).orElse(null); //Se tiver presente traz o produto por ID
     }
 
+    @DeleteMapping("/{id}") //parametros de id
+    public void deletarPorId(@PathVariable("id") String id) {
+        produtoRepository.deleteById(id);
+    }
 
 
 }
