@@ -1,14 +1,21 @@
 package io.github.danzn.produtosapi.controller;
-import io.github.danzn.produtosapi.model.Produto;
-import io.github.danzn.produtosapi.repository.ProdutoRepository;
+import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import io.github.danzn.produtosapi.model.Produto;
+import io.github.danzn.produtosapi.repository.ProdutoRepository;
 
 @RestController
 @RequestMapping("/produtos")
@@ -25,7 +32,7 @@ public class ProdutoController {
     @PostMapping //Enviar dados
     public Produto salvar(@RequestBody Produto produto) { //@RequestBody , E para vir no boody da minha requisicao;
         System.out.println("Produto recebido: " + produto.toString()); //Produto recebido: Produto{descricao='Eu sou o melhor computador que o MAC', id='null', nome='Computador', preco=444.0}
-        String id = UUID.randomUUID()  .toString(); //Gera um hash de id
+        String id = UUID.randomUUID().toString(); //Gera um hash de id
         produto.setId(id);
 
         produtoRepository.save(produto);
